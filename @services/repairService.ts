@@ -6,8 +6,9 @@ import { RepairDetails } from "../@types";
 export class RepairService {
   constructor(private repairRepository: RepairRepository) {}
 
-  async getAllRepairs() {
-    const results = await this.repairRepository.getAll();
+  async getAllRepairs(limit: number, offset: number) {
+
+    const results = await this.repairRepository.getAll(limit, offset);
 
     if (!results.length) {
       throw new ErrorHandler(STATUSCODE.NOT_FOUND, "Repairs not found");
