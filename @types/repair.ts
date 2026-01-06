@@ -44,6 +44,7 @@ type RepairDetails = {
   unit_status: UnitStatus;
   unit_remarks: UnitRemarks;
   unit_category: UnitCategory;
+  technician_id: number
 };
 
 export { RepairQueryResults, RepairDetails };
