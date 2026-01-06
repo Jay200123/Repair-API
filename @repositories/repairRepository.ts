@@ -93,10 +93,11 @@ export class RepairRepository {
             unit_status,
             unit_remarks,
             unit_category,
+            technician_id,
             createdAt,
             updatedAt
           )
-      VALUES (?,?,?,?,?,?,?,?,?,?,NOW(), NOW())`;
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())`;
 
     return new Promise<ResultSetHeader>((resolve, reject) => {
       this.query.query<ResultSetHeader>(
@@ -112,6 +113,7 @@ export class RepairRepository {
           data.unit_status,
           data.unit_remarks,
           data.unit_category,
+          data.technician_id
         ],
         (err, results) => {
           if (err) {
