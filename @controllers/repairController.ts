@@ -15,7 +15,10 @@ export class RepairController {
       },
     });
 
-    const result = await this.repairService.getAllRepairs();
+    const result = await this.repairService.getAllRepairs(
+      Number(req.query.limit) || 10,
+      Number(req.query.offset) || 0
+    );
 
     logger.info({
       GET_ALL_REPAIRS_RESPONSE: {
