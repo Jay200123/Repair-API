@@ -1,5 +1,5 @@
 import { Database } from "../@config";
-import { Pool, QueryError, ResultSetHeader } from "mysql2";
+import { Pool, ResultSetHeader } from "mysql2";
 import { RepairQueryResults, RepairDetails } from "../@types";
 
 export class RepairRepository {
@@ -10,9 +10,9 @@ export class RepairRepository {
     this.query = database.EstablishConnection();
   }
 
-  async getAll(): Promise<RepairQueryResults[]> {
+  async getAll(limit: number, offset: number): Promise<RepairQueryResults[]> {
     const sql = `
-        SELECT
+       SELECT
           a.id AS repair_id,  
           b.item_sku,
           b.item_name,
@@ -24,14 +24,21 @@ export class RepairRepository {
           a.date_repaired,
           a.unit_status,
           a.unit_remarks,
-          a.unit_category
-        FROM repair_details a
-        INNER JOIN units b ON b.id = a.unit_id`;
+          a.unit_category,
+          c.technician_name,
+          a.createdAt,
+          a.updatedAt
+      FROM repair_details a
+      INNER JOIN units b ON b.id = a.unit_id
+      INNER JOIN technician_details c ON  c.id = a.technician_id
+      ORDER BY a.id ASC
+      LIMIT ? OFFSET ?`;
 
     return new Promise((resolve, reject) => {
       this.query.query(
         sql,
-        (err: QueryError, results: RepairQueryResults[]) => {
+        [limit, offset],
+        (err, results: RepairQueryResults[]) => {
           if (err) {
             reject(err);
           }
