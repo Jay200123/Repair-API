@@ -14,7 +14,8 @@ const createRepairFields = [
     .notEmpty()
     .withMessage("unit_id required")
     .bail()
-    .isInt({ min: 1 }),
+    .isInt({ min: 1 })
+    .withMessage("Invalid ID"),
   body("serial_number")
     .notEmpty()
     .withMessage("serial_number required")
@@ -83,6 +84,12 @@ const createRepairFields = [
     .bail()
     .isIn(["DEFECTIVE_UNIT", "CUSTOMER_UNIT"])
     .withMessage("unit_category must be 'DEFECTIVE_UNIT', 'CUSTOMER_UNIT'"),
+  body("technician_id")
+    .notEmpty()
+    .withMessage("technician_id required")
+    .bail()
+    .isInt({ min: 1 })
+    .withMessage("Invalid ID"),
 ];
 
 export { repairIdParam, createRepairFields };
