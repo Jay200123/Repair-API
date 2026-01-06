@@ -4,6 +4,8 @@ import { logger } from "./@utils";
 import { ErrorMiddleware } from "./@middlewares";
 import { repair } from "./@routes";
 import { STATUSCODE } from "./@constants";
+import cors from "cors";
+import { corsOption } from "./@config";
 
 dotenv.config();
 
@@ -21,6 +23,8 @@ app.use(express.json());
  * "extended: true" enables parsing of nested objects.
  **/
 app.use(express.urlencoded({ extended: true }));
+
+app.use(cors(corsOption));
 
 app.get("/", (req, res) => {
   return res.status(200).json({
