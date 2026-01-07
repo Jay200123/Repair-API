@@ -69,5 +69,29 @@ export class RepairController {
     return SuccessHandler(res, STATUSCODE.CREATED, result, "Success");
   };
 
+  // pending feature.
   updateRepairById: MiddlewareFn = async (req, res, next) => {};
+
+  getRepairDetailsByDateRepaired: MiddlewareFn = async (req, res, next) => {
+    logger.info({
+      GET_REPAIR_DETAILS_BY_DATE_REPAIRED_REQUEST: {
+        message: "SUCCESS",
+      },
+    });
+
+    const results = await this.repairService.getRepairDetailsByDateRepaired(
+      // Explicitly cast to 'string' for TypeScript.
+      // Note: This assumes that validation has already ensured the query parameter exists and is not undefined.
+      req.query.date_from as string,
+      req.query.date_to as string
+    );
+
+    logger.info({
+      GET_REPAIR_DETAILS_BY_DATE_REPAIRED_RESPONSE: {
+        message: "SUCCESS",
+      },
+    });
+
+    return SuccessHandler(res, STATUSCODE.SUCCESS, results, "Success");
+  };
 }
