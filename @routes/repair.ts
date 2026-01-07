@@ -4,7 +4,7 @@ import { RepairRepository, SettingsRepository } from "../@repositories";
 import { RepairService } from "../@services";
 import { RepairController } from "../@controllers/repairController";
 import { PATH } from "../@constants";
-import { createRepairFields } from "../@validations";
+import { createRepairFields, repairsQueryParams } from "../@validations";
 import { AuthenticationMiddleware } from "../@middlewares";
 
 const router = express.Router();
@@ -23,7 +23,14 @@ const authenticationMiddleware = new AuthenticationMiddleware(
 router.get(
   PATH.REPAIRS,
   authenticationMiddleware.BasicAuthVerifier(),
+  repairsQueryParams,
   repairController.getAllRepairs
+);
+
+// get repairs by date repaired endpoint
+router.get(
+  PATH.REPAIRS_REPAIRED,
+  repairController.getRepairDetailsByDateRepaired
 );
 
 //get repair by id endpoint
