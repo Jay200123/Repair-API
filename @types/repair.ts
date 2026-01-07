@@ -1,4 +1,4 @@
-import { ResultSetHeader, RowDataPacket } from "mysql2";
+import { RowDataPacket } from "mysql2";
 
 type UnitStatus = "GOOD" | "FOR_SCRAP" | "FOR_REPAIR" | "UNDER_OBSERVATION";
 
@@ -44,7 +44,7 @@ type RepairDetails = {
   unit_status: UnitStatus;
   unit_remarks: UnitRemarks;
   unit_category: UnitCategory;
-  technician_id: number
+  technician_id: number;
 };
 
 export { RepairQueryResults, RepairDetails };
