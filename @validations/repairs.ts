@@ -1,4 +1,4 @@
-import { body, param } from "express-validator";
+import { body, param, query } from "express-validator";
 
 const repairIdParam = [
   param("id")
@@ -92,4 +92,45 @@ const createRepairFields = [
     .withMessage("Invalid ID"),
 ];
 
-export { repairIdParam, createRepairFields };
+const repairsQueryParams = [
+  query("limit")
+    .notEmpty()
+    .withMessage("Invalid Request")
+    .bail()
+    .isInt({ min: 10 })
+    .withMessage("Invalid Params")
+    .toInt(),
+  query("offset")
+    .notEmpty()
+    .bail()
+    .withMessage("Invalid Request")
+    .isInt({ min: 0 })
+    .withMessage("Invalid Params")
+    .toInt(),
+];
+
+const repairedUnitsQueryParams = [
+  query("date_from")
+    .notEmpty()
+    .withMessage("date_from required")
+    .bail()
+    .isISO8601()
+    .withMessage("date_from must be a valid date")
+    .trim()
+    .escape(),
+  query("date_to")
+    .notEmpty()
+    .withMessage("date_to required")
+    .bail()
+    .isISO8601()
+    .withMessage("date_to must be a valid date")
+    .trim()
+    .escape(),
+];
+
+export {
+  repairIdParam,
+  createRepairFields,
+  repairsQueryParams,
+  repairedUnitsQueryParams,
+};
