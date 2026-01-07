@@ -113,7 +113,7 @@ export class RepairRepository {
           data.unit_status,
           data.unit_remarks,
           data.unit_category,
-          data.technician_id
+          data.technician_id,
         ],
         (err, results) => {
           if (err) {
@@ -126,5 +126,56 @@ export class RepairRepository {
     });
   }
 
-  async updateById() {}
+  async updateById(id: number, data: any) {
+    const sql = `UPDATE repair_details SET ${data} WHERE id = ?`;
+
+    return new Promise((resolve, reject) => {
+      this.query.query(sql, [id], (err, result) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(result);
+      });
+    });
+  }
+
+  async getByDateRepaired(
+    date_from: string,
+    date_to: string
+  ): Promise<RepairQueryResults[]> {
+    const sql = `
+        SELECT
+          a.id AS repair_id,  
+          b.item_sku,
+          b.item_name,
+          a.serial_number,
+          a.actual_problem,
+          a.unit_findings,
+          a.work_done,
+          a.date_returned,
+          a.date_repaired,
+          a.unit_status,
+          a.unit_remarks,
+          a.unit_category,
+          c.technician_name
+        FROM repair_details a
+        INNER JOIN units b ON b.id = a.unit_id
+        INNER JOIN technician_details c ON  c.id = a.technician_id
+        WHERE a.date_repaired BETWEEN ? AND ?
+        ORDER BY a.id ASC`;
+
+    return new Promise((resolve, reject) => {
+      this.query.query(
+        sql,
+        [date_from, date_to],
+        (err, results: RepairQueryResults[]) => {
+          if (err) {
+            reject(err);
+          }
+
+          resolve(results);
+        }
+      );
+    });
+  }
 }
