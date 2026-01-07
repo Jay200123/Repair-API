@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import { logger } from "./@utils";
 import { ErrorMiddleware } from "./@middlewares";
-import { repair } from "./@routes";
+import { repair, unit } from "./@routes";
 import { STATUSCODE } from "./@constants";
 import cors from "cors";
 import { corsOption } from "./@config";
@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
   });
 });
 
-app.use("/api/v1", repair);
+app.use("/api/v1", repair, unit);
 
 app.all("/*splat", (req, res) => {
   return res.status(STATUSCODE.METHOD_NOT_ALLOWED).json({
