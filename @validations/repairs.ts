@@ -10,12 +10,7 @@ const repairIdParam = [
 ];
 
 const createRepairFields = [
-  body("unit_id")
-    .notEmpty()
-    .withMessage("unit_id required")
-    .bail()
-    .isInt({ min: 1 })
-    .withMessage("Invalid ID"),
+  body("unit_id").notEmpty().withMessage("unit_id required"),
   body("serial_number")
     .notEmpty()
     .withMessage("serial_number required")
@@ -87,9 +82,6 @@ const createRepairFields = [
   body("technician_id")
     .notEmpty()
     .withMessage("technician_id required")
-    .bail()
-    .isInt({ min: 1 })
-    .withMessage("Invalid ID"),
 ];
 
 const repairsQueryParams = [
