@@ -14,8 +14,8 @@ export class RepairRepository {
     const sql = `
        SELECT
           a.id AS repair_id,  
-          b.item_sku,
-          b.item_name,
+          b.unit_sku,
+          b.unit_name,
           a.serial_number,
           a.actual_problem,
           a.unit_findings,
@@ -52,8 +52,8 @@ export class RepairRepository {
     const sql = `
      SELECT
       a.id AS repair_id,
-      b.item_sku,
-      b.item_name,
+      b.unit_sku,
+      b.unit_name,
       a.serial_number,
       a.actual_problem,
       a.unit_findings,
