@@ -9,7 +9,7 @@ const repairFields = [
   "unit_status",
   "unit_remarks",
   "unit_category",
-  "unit_id",
+  "technician_id",
 ];
 
 export { repairFields };
