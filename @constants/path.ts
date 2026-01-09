@@ -8,4 +8,7 @@ export const PATH = {
   UNIT_ID: "/unit/:id",
   EDIT_UNIT_ID: "/edit/unit/:id",
   SKU: "/sku",
+  TECHNICIANS: "/technicians",
+  TECHNICIAN_ID: "/technician/:id",
+  EDIT_TECHNICIAN_ID: "/edit/technician/:id",
 };
