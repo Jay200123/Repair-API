@@ -35,6 +35,7 @@ interface RepairQueryResults extends RowDataPacket {
 
 type RepairDetails = {
   unit_id: number;
+  complaint: string;
   serial_number: string;
   actual_problem: string;
   unit_findings: string;
