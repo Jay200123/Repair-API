@@ -36,6 +36,8 @@ export class RepairController {
       },
     });
 
+    expressValidationResults(req);
+
     const result = await this.repairService.getRepairById(
       Number(req.params.id)
     );
@@ -70,7 +72,26 @@ export class RepairController {
   };
 
   // pending feature.
-  updateRepairById: MiddlewareFn = async (req, res, next) => {};
+  updateRepairById: MiddlewareFn = async (req, res, next) => {
+    logger.info({
+      EDIT_REPAIR_BY_ID_REQUEST: {
+        message: "SUCCESS",
+      },
+    });
+
+    const result = await this.repairService.updateRepairById(
+      Number(req.params.id),
+      req.body
+    );
+
+    logger.info({
+      EDIT_REPAIR_BY_ID_RESPONSE: {
+        message: "SUCCESS",
+      },
+    });
+
+    return SuccessHandler(res, STATUSCODE.SUCCESS, result, "Success");
+  };
 
   getRepairDetailsByDateRepaired: MiddlewareFn = async (req, res, next) => {
     logger.info({
