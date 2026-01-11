@@ -1,5 +1,6 @@
 const repairFields = [
   "unit_id",
+  "complaint",
   "serial_number",
   "unit_findings",
   "actual_problem",
