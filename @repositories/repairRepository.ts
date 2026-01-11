@@ -17,6 +17,7 @@ export class RepairRepository {
           b.unit_sku,
           b.unit_name,
           a.serial_number,
+          a.complaint,
           a.actual_problem,
           a.unit_findings,
           a.work_done,
@@ -55,6 +56,7 @@ export class RepairRepository {
       b.unit_sku,
       b.unit_name,
       a.serial_number,
+      a.complaint,
       a.actual_problem,
       a.unit_findings,
       a.work_done,
@@ -84,6 +86,7 @@ export class RepairRepository {
         repair_details
           ( 
             unit_id,
+            complaint,
             serial_number, 
             actual_problem, 
             unit_findings, 
@@ -97,13 +100,14 @@ export class RepairRepository {
             createdAt,
             updatedAt
           )
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())`;
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())`;
 
     return new Promise<ResultSetHeader>((resolve, reject) => {
       this.query.query<ResultSetHeader>(
         sql,
         [
           data.unit_id,
+          data.complaint,
           data.serial_number,
           data.actual_problem,
           data.unit_findings,
@@ -126,11 +130,11 @@ export class RepairRepository {
     });
   }
 
-  async updateById(id: number, data: any) {
+  async updateById(id: number, data: string): Promise<ResultSetHeader> {
     const sql = `UPDATE repair_details SET ${data} WHERE id = ?`;
 
     return new Promise((resolve, reject) => {
-      this.query.query(sql, [id], (err, result) => {
+      this.query.query<ResultSetHeader>(sql, [id], (err, result) => {
         if (err) {
           reject(err);
         }
@@ -146,9 +150,10 @@ export class RepairRepository {
     const sql = `
         SELECT
           a.id AS repair_id,  
-          b.item_sku,
-          b.item_name,
+          b.unit_sku,
+          b.unit_name,
           a.serial_number,
+          a.complaint,
           a.actual_problem,
           a.unit_findings,
           a.work_done,
