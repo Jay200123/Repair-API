@@ -23,6 +23,7 @@ DROP TABLE IF EXISTS `repair_details`;
 CREATE TABLE `repair_details` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `unit_id` int unsigned NOT NULL,
+  `complaint` varchar(55) NOT NULL,
   `serial_number` varchar(6) DEFAULT NULL,
   `actual_problem` text,
   `unit_findings` text,
@@ -40,31 +41,13 @@ CREATE TABLE `repair_details` (
   KEY `technician_id` (`technician_id`),
   CONSTRAINT `repair_details_ibfk_1` FOREIGN KEY (`unit_id`) REFERENCES `units` (`id`),
   CONSTRAINT `repair_details_ibfk_2` FOREIGN KEY (`technician_id`) REFERENCES `technician_details` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf32;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf32;
 
 /*Data for the table `repair_details` */
 
-insert  into `repair_details`(`id`,`unit_id`,`serial_number`,`actual_problem`,`unit_findings`,`work_done`,`date_returned`,`date_repaired`,`unit_status`,`unit_remarks`,`unit_category`,`technician_id`,`createdAt`,`updatedAt`) values 
-(1,7,'123456','No Power','Defective board','Board replaced','2025-12-30','2025-12-31','GOOD','FOR-SHIP','CUSTOMER_UNIT',1,'2026-01-05 20:53:40','2026-01-05 20:53:40'),
-(2,7,'123456','No Power','Defective board','Board replaced','2026-02-02','2026-02-03','GOOD','FOR-SHIP','CUSTOMER_UNIT',1,'2026-01-06 20:37:07','2026-01-06 20:37:07'),
-(3,7,'123456','No Power','Defective board','Board replaced','2026-02-02','2026-02-03','GOOD','FOR-SHIP','CUSTOMER_UNIT',1,'2026-01-06 20:37:09','2026-01-06 20:37:09'),
-(4,7,'123456','No Power','Defective board','Board replaced','2026-02-02','2026-02-03','GOOD','FOR-SHIP','CUSTOMER_UNIT',1,'2026-01-06 20:37:10','2026-01-06 20:37:10'),
-(5,7,'123456','No Power','Defective board','Board replaced','2026-01-02','2026-01-03','GOOD','FOR-SHIP','CUSTOMER_UNIT',1,'2026-01-06 20:41:18','2026-01-06 20:41:18'),
-(6,7,'123456','No Power','Defective board','Board replaced','2026-01-02','2026-01-03','GOOD','FOR-SHIP','CUSTOMER_UNIT',1,'2026-01-06 20:41:19','2026-01-06 20:41:19'),
-(7,7,'123456','No Power','Defective board','Board replaced','2026-01-02','2026-01-03','GOOD','FOR-SHIP','CUSTOMER_UNIT',1,'2026-01-06 21:00:36','2026-01-06 21:00:36'),
-(8,7,'123456','No Power','Defective board','Board replaced','2026-01-02','2026-01-03','GOOD','FOR-SHIP','CUSTOMER_UNIT',1,'2026-01-06 21:00:37','2026-01-06 21:00:37'),
-(9,7,'123456','No Power','Defective board','Board replaced','2026-01-02','2026-01-03','GOOD','FOR-SHIP','CUSTOMER_UNIT',1,'2026-01-06 21:00:37','2026-01-06 21:00:37'),
-(10,7,'123456','No Power','Defective board','Board replaced','2026-01-02','2026-01-03','GOOD','FOR-SHIP','CUSTOMER_UNIT',1,'2026-01-06 21:00:38','2026-01-06 21:00:38'),
-(11,7,'123456','No Power','Defective board','Board replaced','2026-01-02','2026-01-03','GOOD','FOR-SHIP','CUSTOMER_UNIT',1,'2026-01-06 21:00:38','2026-01-06 21:00:38'),
-(12,7,'123456','No Power','Defective board','Board replaced','2026-01-02','2026-01-03','GOOD','FOR-SHIP','CUSTOMER_UNIT',1,'2026-01-06 21:00:39','2026-01-06 21:00:39'),
-(13,7,'123456','No Power','Defective board','Board replaced','2026-01-02','2026-01-03','GOOD','FOR-SHIP','CUSTOMER_UNIT',1,'2026-01-06 21:00:39','2026-01-06 21:00:39'),
-(14,7,'123456','No Power','Defective board','Board replaced','2026-01-02','2026-01-03','GOOD','FOR-SHIP','CUSTOMER_UNIT',1,'2026-01-06 21:00:40','2026-01-06 21:00:40'),
-(15,7,'123456','No Power','Defective board','Board replaced','2026-01-02','2026-01-03','GOOD','FOR-SHIP','CUSTOMER_UNIT',1,'2026-01-06 21:00:40','2026-01-06 21:00:40'),
-(16,7,'123456','No Power','Defective board','Board replaced','2026-01-02','2026-01-03','GOOD','FOR-SHIP','CUSTOMER_UNIT',1,'2026-01-06 21:00:40','2026-01-06 21:00:40'),
-(17,7,'123456','No Power','Defective board','Board replaced','2026-01-02','2026-01-03','GOOD','FOR-SHIP','CUSTOMER_UNIT',1,'2026-01-06 21:00:41','2026-01-06 21:00:41'),
-(18,7,'123456','No Power','Defective board','Board replaced','2026-01-02','2026-01-03','GOOD','FOR-SHIP','CUSTOMER_UNIT',1,'2026-01-06 21:00:41','2026-01-06 21:00:41'),
-(19,7,'123456','No Power','Defective board','Board replaced','2026-01-02','2026-01-03','GOOD','FOR-SHIP','CUSTOMER_UNIT',1,'2026-01-06 21:00:42','2026-01-06 21:00:42'),
-(20,7,'123456','No Power','Defective board','Board replaced','2026-01-02','2026-01-03','GOOD','FOR-SHIP','CUSTOMER_UNIT',1,'2026-01-06 21:00:42','2026-01-06 21:00:42');
+insert  into `repair_details`(`id`,`unit_id`,`complaint`,`serial_number`,`actual_problem`,`unit_findings`,`work_done`,`date_returned`,`date_repaired`,`unit_status`,`unit_remarks`,`unit_category`,`technician_id`,`createdAt`,`updatedAt`) values 
+(1,7,'Not Working','123456','Projector turning off','Defective Motherboard','Motherboard replaced','2026-01-11','2026-01-11','GOOD','CLASS-B','DEFECTIVE_UNIT',1,'2026-01-11 23:18:09','2026-01-11 23:18:09'),
+(2,18,'Not Working','098765','No Suction','Motor Problem','Replaced DC Motor','2026-01-11','2026-01-11','GOOD','FOR-SHIP','CUSTOMER_UNIT',2,'2026-01-11 23:51:27','2026-01-11 23:51:27');
 
 /*Table structure for table `settings` */
 
@@ -95,12 +78,14 @@ CREATE TABLE `technician_details` (
   `updatedAt` datetime DEFAULT NULL,
   `createdAt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf32;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf32;
 
 /*Data for the table `technician_details` */
 
 insert  into `technician_details`(`id`,`technician_name`,`contact_number`,`updatedAt`,`createdAt`) values 
-(1,'RJ','09123456789','2026-01-05 20:53:13','2026-01-05 20:53:13');
+(1,'RJ','09123456789','2026-01-05 20:53:13','2026-01-05 20:53:13'),
+(2,'John Doe','09123456789','2026-01-09 22:34:09','2026-01-09 22:34:09'),
+(3,'Jane Doe','09123456789','2026-01-09 22:34:15','2026-01-09 22:34:15');
 
 /*Table structure for table `units` */
 
@@ -108,17 +93,17 @@ DROP TABLE IF EXISTS `units`;
 
 CREATE TABLE `units` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `item_sku` enum('WANBO','DREAME','UWANT') DEFAULT NULL,
-  `item_name` varchar(32) DEFAULT NULL,
+  `unit_sku` enum('WANBO','DREAME','UWANT') CHARACTER SET utf32 COLLATE utf32_general_ci DEFAULT NULL,
+  `unit_name` varchar(32) CHARACTER SET utf32 COLLATE utf32_general_ci DEFAULT NULL,
   `createdAt` datetime DEFAULT NULL,
   `updatedAt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `item_sku` (`item_sku`)
+  KEY `item_sku` (`unit_sku`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf32;
 
 /*Data for the table `units` */
 
-insert  into `units`(`id`,`item_sku`,`item_name`,`createdAt`,`updatedAt`) values 
+insert  into `units`(`id`,`unit_sku`,`unit_name`,`createdAt`,`updatedAt`) values 
 (7,'WANBO','Dali 1','2025-12-31 12:44:55','2025-12-31 12:44:55'),
 (10,'WANBO','Mini','2025-12-31 12:44:55','2025-12-31 12:44:55'),
 (14,'WANBO','T2 Ultra','2025-12-31 12:45:12','2025-12-31 12:45:12'),
