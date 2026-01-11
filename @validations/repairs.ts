@@ -1,16 +1,16 @@
 import { body, param, query } from "express-validator";
 
 const repairIdParam = [
-  param("id")
-    .exists({ checkFalsy: true }) // ensures the field exists and is not empty (undefined, null, or empty string)
-    .withMessage("Invalid ID")
-    .bail()
-    .isInt({ min: 1 })
-    .withMessage("Invalid ID"),
+  param("id").trim().escape().isInt({ min: 1 }).withMessage("Invalid ID"),
 ];
 
 const createRepairFields = [
   body("unit_id").notEmpty().withMessage("unit_id required"),
+  body("complaint")
+    .trim()
+    .escape()
+    .notEmpty()
+    .withMessage("complaint required"),
   body("serial_number")
     .notEmpty()
     .withMessage("serial_number required")
@@ -79,9 +79,7 @@ const createRepairFields = [
     .bail()
     .isIn(["DEFECTIVE_UNIT", "CUSTOMER_UNIT"])
     .withMessage("unit_category must be 'DEFECTIVE_UNIT', 'CUSTOMER_UNIT'"),
-  body("technician_id")
-    .notEmpty()
-    .withMessage("technician_id required")
+  body("technician_id").notEmpty().withMessage("technician_id required"),
 ];
 
 const repairsQueryParams = [
